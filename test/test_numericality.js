@@ -37,9 +37,9 @@ var suite = wrap({
   },
   suite: {
     "only_integer": test_only_integer,
-    "test_even": test_even,
-    "test_odd": test_odd,
-    "test_comparisons": test_comparisons
+    "even": test_even,
+    "odd": test_odd,
+    "comparisons": test_comparisons
   },
   suiteTeardown: function(done) {
     done();
@@ -138,7 +138,7 @@ function test_num_type(test, num_type, msg_tmpl,
 
   test_val_should_error_tuples(val_should_error_tuples,
     _test_should_error(test, config, 
-      interp_s(msg_tmpl, {name: 'P', compare_to: compare_to})),
+      test_util.interp_s(msg_tmpl, {name: 'P', compare_to: compare_to})),
     _test_should_not_error(test, config));
 }
 
@@ -159,11 +159,6 @@ function _test_should_not_error(test, config) {
     var errors = validator.validate(test.o, config);
     test.equal(true, !errors, "errors is a non-blank value.");
   }
-}
-
-function interp_s(tmpl, values) {
-  _.each(values, function(v, k) { tmpl = tmpl.replace('{{' + k + '}}', v); });
-  return tmpl;
 }
 
 function test_val_should_error_tuples(val_should_error_tuples, test_should_error, test_should_not_error) {
