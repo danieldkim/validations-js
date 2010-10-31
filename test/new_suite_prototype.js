@@ -37,3 +37,5 @@ var suite = wrap({
     done();
   }  
 });
+
+module.exports = { 'Generic suite name (change me)': suite };

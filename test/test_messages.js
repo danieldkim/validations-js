@@ -37,3 +37,5 @@ var suite = wrap({
     done();
   }  
 });
+
+module.exports = { 'Messages tests': suite };
