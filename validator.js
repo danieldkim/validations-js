@@ -83,7 +83,7 @@ var new_errors= exports.new_errors = function() {
 }
 
 var valid_funcs = {
-  required: function(val) {return val;},
+  required: function(val) {return val != undefined && val != null;},
   length: {
     is: function(val, compare_to) {return val.length == compare_to;},
     max: function(val, compare_to) {return val.length <= compare_to; },

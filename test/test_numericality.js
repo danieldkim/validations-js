@@ -136,36 +136,10 @@ function test_num_type(test, num_type, msg_tmpl,
   config.properties.p.numericality[num_type] = 
     compare_to == undefined ? true : compare_to;
 
-  test_val_should_error_tuples(val_should_error_tuples,
-    _test_should_error(test, config, 
+  test_util.test_val_should_error_tuples(val_should_error_tuples,
+    test_util._test_should_error(test, config, 
       test_util.interp_s(msg_tmpl, {name: 'P', compare_to: compare_to})),
-    _test_should_not_error(test, config));
+    test_util._test_should_not_error(test, config));
 }
 
-function _test_should_error(test, config, msg) {
-  return function(val) {
-    test.o.p = val;
-    var errors = validator.validate(test.o, config);
-    test.ok(errors, "no errors returned.");
-    test.ok(errors.on('p'), "no errors on 'p'");
-    test.equal(1, errors.on('p').length, "should only have 1 error on 'p'");    
-    test.equal(msg, errors.on('p')[0]); 
-  }
-}
-
-function _test_should_not_error(test, config) {
-  return function(val) {
-    test.o.p = val;
-    var errors = validator.validate(test.o, config);
-    test.equal(true, !errors, "errors is a non-blank value.");
-  }
-}
-
-function test_val_should_error_tuples(val_should_error_tuples, test_should_error, test_should_not_error) {
-  _.each(val_should_error_tuples, function(val_should_error) {
-    var val = val_should_error[0], should_error = val_should_error[1];
-    if (should_error) test_should_error(val);
-    else test_should_not_error(val);
-  });
-}
 

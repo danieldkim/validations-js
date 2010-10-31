@@ -36,9 +36,26 @@ var suite = wrap({
     done();
   },
   suite: {
+    'required': test_required
   },
   suiteTeardown: function(done) {
     done();
   }  
 });
 
+module.exports = { 'Required tests': suite };
+
+function test_required(test) {
+  var errors, config = test.validation_config, 
+      msg_tmpl = config.default_messages.required;
+
+  test_util.test_val_should_error_tuples([
+      [undefined, true], [null, true], [0, false],
+      [1, false], ["a", false], [true, false]
+    ],
+    test_util._test_should_error(test, config, 
+      test_util.interp_s(msg_tmpl, {name: 'P'})),
+    test_util._test_should_not_error(test, config));
+            
+  test.finish();
+}
