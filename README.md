@@ -236,7 +236,7 @@ display an error with the *lat* property like so:
         && errors.on("location").is_invalid("lat"))
       sys.puts("Problem with lat: " + errors.on("location").on("lat").join(" "));
 
-# License
+## License
 
 Copyright (c) 2010 Daniel Kim
 
