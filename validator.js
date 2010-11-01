@@ -102,7 +102,7 @@ var valid_funcs = {
     less_than_or_equal_to: function(val, compare_to) {return val <= compare_to;} 
   },
   format: {
-    pattern: function(val, compare_to) {return val.match(compare_to);}
+    pattern: function(val, compare_to) {return val.toString().match(compare_to);}
   }
 }
 // we want to execute the validations in this order
