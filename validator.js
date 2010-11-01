@@ -5,7 +5,7 @@ require('inflection');
 var global_default_messages = {
   required: "{{name}} is required.",
   length: {
-    is_message: "{{name}} must be exactly {{compare_to}} characters.",
+    is: "{{name}} must be exactly {{compare_to}} characters.",
     min: "{{name}} must be at least {{compare_to}} characters.",
     max: "{{name}} must not exceed {{compare_to}} characters."
   },
@@ -82,12 +82,14 @@ var new_errors= exports.new_errors = function() {
   };
 }
 
+function is_blank(v) { return v === undefined || v === null; }
+
 var valid_funcs = {
-  required: function(val) {return val != undefined && val != null;},
+  required: function(val) {return !is_blank(val);},
   length: {
-    is: function(val, compare_to) {return val.length == compare_to;},
-    max: function(val, compare_to) {return val.length <= compare_to; },
-    min: function(val, compare_to) {return val.length >= compare_to; }
+    is: function(val, compare_to) {if (is_blank(val)) return true; return val.toString().length == compare_to;},
+    max: function(val, compare_to) {if (is_blank(val)) return true; return val.toString().length <= compare_to; },
+    min: function(val, compare_to) {if (is_blank(val)) return true; return val.toString().length >= compare_to; }
   },
   numericality: {
     only_integer: function(val) {return parseInt(val) == val;}, 
