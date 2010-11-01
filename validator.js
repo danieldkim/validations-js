@@ -87,9 +87,9 @@ function is_blank(v) { return v === undefined || v === null; }
 var valid_funcs = {
   required: function(val) {return !is_blank(val);},
   length: {
-    is: function(val, compare_to) {if (is_blank(val)) return true; return val.toString().length == compare_to;},
-    max: function(val, compare_to) {if (is_blank(val)) return true; return val.toString().length <= compare_to; },
-    min: function(val, compare_to) {if (is_blank(val)) return true; return val.toString().length >= compare_to; }
+    is: function(val, compare_to) {return val.toString().length == compare_to;},
+    max: function(val, compare_to) {return val.toString().length <= compare_to; },
+    min: function(val, compare_to) {return val.toString().length >= compare_to; }
   },
   numericality: {
     only_integer: function(val) {return parseInt(val) == val;}, 
@@ -168,6 +168,7 @@ exports.validate = function validate(obj, config) {
     for (var i = 0; i < validation_types.length; i++) {
       var validation_type = validation_types[i];
       if (!prop_config[validation_type]) continue;
+      if (validation_type != 'required' && is_blank(value)) continue;
       if (typeof valid_funcs[validation_type] == 'function') {
         var is_valid = test_and_add_error_message(prop_name, prop_config, 
                          validation_type, value);
