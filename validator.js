@@ -48,8 +48,8 @@ var new_errors= exports.new_errors = function() {
       return this.size();
     },
     each: function(callback) {
-      _.each(_errors, function(error, name) {
-        callback(name, error);
+      _.each(_errors, function(errors, name) {
+        callback(name, errors);
       })
     },
     is_empty: function() {
