@@ -50,7 +50,7 @@ function test_required(test) {
       msg_tmpl = config.default_messages.required;
 
   test_util.test_val_should_error_tuples([
-      [undefined, true], [null, true], [0, false],
+      [undefined, true], [null, true], ["", true], [0, false],
       [1, false], ["a", false], [true, false]
     ],
     test_util._test_should_error(test, config, 

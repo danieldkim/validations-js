@@ -82,7 +82,7 @@ var new_errors= exports.new_errors = function() {
   };
 }
 
-function is_blank(v) { return v === undefined || v === null; }
+function is_blank(v) { return v === undefined || v === null || v === ''; }
 
 var valid_funcs = {
   required: function(val) {return !is_blank(val);},
