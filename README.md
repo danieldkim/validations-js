@@ -1,6 +1,6 @@
-# validator-js
+# validations-js
 
-validator-js is a validation library for JavaScript objects modeled loosely on
+validations-js is a validation library for JavaScript objects modeled loosely on
 [ActiveRecord validations](
 http://ar.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html ).
 Currently supports options to validate requiredness, length, numericality, and
@@ -16,16 +16,16 @@ format.
 
 ## Usage
 
-To use the validator library, require validator.js and call the validator
+To use the validations library, require validations.js and call the validations
 function, passing it the object to be validated and a validation configuration,
 like so:
 
-    var validator = require('validator');
-    var errors = validator.validate(my_object, my_validation_config);
-  
+    var validations = require('validations');
+    var errors = validations.validate(my_object, my_validation_config);
+
 The various configuration options and the api for the errors object that is
 returned are discussed below.
-  
+
 ### Validation configuration
 
 To specify the rules for the properties of an object, set the *properties*
@@ -33,18 +33,18 @@ property of the validation configuration with a hash that contains the
 configuration for each property. For example, validating that an object has a
 required property can be done like so:
 
-    var errors = validator.validate(my_object, {
-      properties: { 
+    var errors = validations.validate(my_object, {
+      properties: {
         my_prop: {
           required: true
         }
       }
     });
 
-To validate the length of property use the *length* option:  
+To validate the length of property use the *length* option:
 
-    var errors = validator.validate(my_object, {
-      properties: { 
+    var errors = validations.validate(my_object, {
+      properties: {
         my_prop_a: {
           length: {
             is: 1
@@ -59,21 +59,21 @@ To validate the length of property use the *length* option:
           length: {
             min: 1
           }
-        }        
+        }
       }
     });
 
 You can specify multiple options on a single property:
 
-    var errors = validator.validate(my_object, {
-      properties: { 
+    var errors = validations.validate(my_object, {
+      properties: {
         my_prop_a: {
           required: true,
           length: {
             min: 1,
             max: 10
           }
-        }        
+        }
       }
     });
 
@@ -91,17 +91,17 @@ These are all the validation options:
     * only\_integer
     * greater\_than
     * greater\_than\_or\_equal\_to
-    * equal\_to 
+    * equal\_to
     * less\_than
     * less\_than\_or\_equal_to
-    * odd 
+    * odd
     * even
 * format
     * pattern
-    
+
 #### Message configuration
 
-validator-js comes packaged with a default set of error messages for each of the validation options:
+validations-js comes packaged with a default set of error messages for each of the validation options:
 
     {
       required: "{{name}} is required.",
@@ -118,7 +118,7 @@ validator-js comes packaged with a default set of error messages for each of the
         less_than: "{{name}} must be less than {{compare_to}}.",
         less_than_or_equal_to: "{{name}} must be less than or equal to {{compare_to}}.",
         odd: "{{name}} must be an odd number.",
-        even: "{{name}} must be an even number."    
+        even: "{{name}} must be an even number."
       },
       format: {
         pattern: "{{name}} is not formatted correctly."
@@ -132,8 +132,8 @@ compared to, if relevant.
 Any of these messages can be overridden by specifying a message option on the
 property configuration like so:
 
-    var errors = validator.validate(my_object, {
-      properties: { 
+    var errors = validations.validate(my_object, {
+      properties: {
         my_prop: {
           required: true,
           message: "Where the hell is {{name}}?"
@@ -145,13 +145,13 @@ If you would like to override the message for a particular option for all
 properties in a configuration, you can pass a *default\_messages* configuration
 like so:
 
-    var errors = validator.validate(my_object, {
+    var errors = validations.validate(my_object, {
       default_messages: {
         length: {
           is: "{{name}} must be {{compare_to}} characters in length, no more, no less."
         }
       },
-      properties: { 
+      properties: {
         my_prop_a: {
           length: {
             is: 1
@@ -161,14 +161,14 @@ like so:
           length: {
             is: 2
           }
-        }        
+        }
       }
     });
 
 ### Errors object
 
 The errors object returned by the *validate* function acts like the ActiveRecord
-Validations errors objects. 
+Validations errors objects.
 
 Here are the methods available:
 
@@ -181,10 +181,10 @@ Here are the methods available:
     sys.puts("Errors on " + name + ":" + errors.join(" "));
   })
   </pre>
-  *errors* is an normally an array of error messages.  When using recursion, 
+  *errors* is an normally an array of error messages.  When using recursion,
   *errors* may be a child errors object on which all of these methods can be
-  called. 
-  
+  called.
+
 * is_empty() - return true if there no errors.
 
 * messages() - returns all error messages in an array.
@@ -199,13 +199,13 @@ Here are the methods available:
 
 ### Recursion
 
-validator-js can validate recursively. A property of an object can be an object
+validations-js can validate recursively. A property of an object can be an object
 that has its own configuration. Use the *object* option to specify a
 sub-configuration for an object property. For example, let's say you had an
 object representing a place, with a *location* property that is itself an object
 with a *lat* and *lon* property. You might validate it like so:
 
-    var errors = validator.validate(place, {
+    var errors = validations.validate(place, {
       properties: {
         name: {
           required: true,
@@ -231,8 +231,8 @@ with a *lat* and *lon* property. You might validate it like so:
 The errors object returned by *validate* is also recursive. You would detect and
 display an error with the *lat* property like so:
 
-    if (!is_blank(errors) 
-        && errors.is_invalid("location") 
+    if (!is_blank(errors)
+        && errors.is_invalid("location")
         && errors.on("location").is_invalid("lat"))
       sys.puts("Problem with lat: " + errors.on("location").on("lat").join(" "));
 
