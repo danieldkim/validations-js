@@ -16,6 +16,10 @@ format.
 
 ## Usage
 
+You can install using npm:
+
+    npm install validations
+    
 To use the validations library, require validations.js and call the validations
 function, passing it the object to be validated and a validation configuration,
 like so:
