@@ -88,12 +88,12 @@ These are all the validation options:
     * min
     * max
 * numericality
-    * only\_integer
-    * greater\_than
-    * greater\_than\_or\_equal\_to
-    * equal\_to
-    * less\_than
-    * less\_than\_or\_equal_to
+    * onlyInteger
+    * greaterThan
+    * greaterThanOrEqualTo
+    * equalTo
+    * lessThan
+    * lessThanOrEqualTo
     * odd
     * even
 * format
@@ -111,12 +111,12 @@ validations-js comes packaged with a default set of error messages for each of t
         max: "{{name}} must not exceed {{compare_to}} characters."
       },
       numericality: {
-        only_integer: "{{name}} must be an integer.",
-        greater_than: "{{name}} must be greater than {{compare_to}}",
-        greater_than_or_equal_to: "{{name}} must be greater than or equal to {{compare_to}}.",
-        equal_to: "{{name}} must be equal to {{compare_to}}.",
-        less_than: "{{name}} must be less than {{compare_to}}.",
-        less_than_or_equal_to: "{{name}} must be less than or equal to {{compare_to}}.",
+        onlyInteger: "{{name}} must be an integer.",
+        greaterThan: "{{name}} must be greater than {{compare_to}}",
+        greaterThanOrEqualTo: "{{name}} must be greater than or equal to {{compare_to}}.",
+        equalTo: "{{name}} must be equal to {{compare_to}}.",
+        lessThan: "{{name}} must be less than {{compare_to}}.",
+        lessThanOrEqualTo: "{{name}} must be less than or equal to {{compare_to}}.",
         odd: "{{name}} must be an odd number.",
         even: "{{name}} must be an even number."
       },
@@ -185,11 +185,11 @@ Here are the methods available:
   *errors* may be a child errors object on which all of these methods can be
   called.
 
-* is_empty() - return true if there no errors.
+* isEmpty() - return true if there no errors.
 
 * messages() - returns all error messages in an array.
 
-* is_invalid(name) - returns true if an error was found with *name*.
+* isInvalid(name) - returns true if an error was found with *name*.
 
 * length() - returns the total number of errors found.  alias for *size()*.
 
@@ -216,11 +216,11 @@ with a *lat* and *lon* property. You might validate it like so:
             properties: {
               lat: {
                 required: true,
-                numericality: {greater_than_or_equal_to: -90, less_than_or_equal_to: 90}
+                numericality: {greaterThanOrEqualTo: -90, lessThanOrEqualTo: 90}
               },
               lon: {
                 required: true,
-                numericality: {greater_than_or_equal_to: -180, less_than_or_equal_to: 180}
+                numericality: {greaterThanOrEqualTo: -180, lessThanOrEqualTo: 180}
               }
             }
           }
@@ -231,9 +231,9 @@ with a *lat* and *lon* property. You might validate it like so:
 The errors object returned by *validate* is also recursive. You would detect and
 display an error with the *lat* property like so:
 
-    if (!is_blank(errors)
-        && errors.is_invalid("location")
-        && errors.on("location").is_invalid("lat"))
+    if (!isBlank(errors)
+        && errors.isInvalid("location")
+        && errors.on("location").isInvalid("lat"))
       sys.puts("Problem with lat: " + errors.on("location").on("lat").join(" "));
 
 ## License

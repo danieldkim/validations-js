@@ -15,12 +15,12 @@ var global_default_messages = {
     max: "{{name}} must not exceed {{compare_to}} characters."
   },
   numericality: {
-    only_integer: "{{name}} must be an integer.",
-    greater_than: "{{name}} must be greater than {{compare_to}}",
-    greater_than_or_equal_to: "{{name}} must be greater than or equal to {{compare_to}}.",
-    equal_to: "{{name}} must be equal to {{compare_to}}.",
-    less_than: "{{name}} must be less than {{compare_to}}.",
-    less_than_or_equal_to: "{{name}} must be less than or equal to {{compare_to}}.",
+    onlyInteger: "{{name}} must be an integer.",
+    greaterThan: "{{name}} must be greater than {{compare_to}}",
+    greaterThanOrEqualTo: "{{name}} must be greater than or equal to {{compare_to}}.",
+    equalTo: "{{name}} must be equal to {{compare_to}}.",
+    lessThan: "{{name}} must be less than {{compare_to}}.",
+    lessThanOrEqualTo: "{{name}} must be less than or equal to {{compare_to}}.",
     odd: "{{name}} must be an odd number.",
     even: "{{name}} must be an even number."    
   },
@@ -29,7 +29,7 @@ var global_default_messages = {
   }
 }
 
-var new_errors= exports.new_errors = function() {
+var newErrors= exports.newErrors = function() {
   var _errors = {};
   return {
     errors: function() {return _errors},
@@ -43,7 +43,7 @@ var new_errors= exports.new_errors = function() {
         _errors[name] = error;
       }
     },
-    add_to_base: function(error) {
+    addToBase: function(error) {
       this.add('_base', error);
     },
     clear: function() {
@@ -57,13 +57,13 @@ var new_errors= exports.new_errors = function() {
         callback(name, errors);
       })
     },
-    is_empty: function() {
+    isEmpty: function() {
       return _.isEmpty(_errors);
     },
     messages: function() {
       return _.flatten(_.values(_errors));
     },
-    is_invalid: function(name) {
+    isInvalid: function(name) {
       var error = _errors[name];
       if (!error) return false;
       if (typeof error == 'array') return error.length > 0;
@@ -75,7 +75,7 @@ var new_errors= exports.new_errors = function() {
     on: function(name) {
       return _errors[name];
     }, 
-    on_base: function() {
+    onBase: function() {
       return _errors['_base'];
     },
     size: function() {
@@ -87,24 +87,24 @@ var new_errors= exports.new_errors = function() {
   };
 }
 
-function is_blank(v) { return v === undefined || v === null || v === ''; }
+function isBlank(v) { return v === undefined || v === null || v === ''; }
 
 var valid_funcs = {
-  required: function(val) {return !is_blank(val);},
+  required: function(val) {return !isBlank(val);},
   length: {
     is: function(val, compare_to) {return val.toString().length == compare_to;},
     max: function(val, compare_to) {return val.toString().length <= compare_to; },
     min: function(val, compare_to) {return val.toString().length >= compare_to; }
   },
   numericality: {
-    only_integer: function(val) {return parseInt(val) == val;}, 
+    onlyInteger: function(val) {return parseInt(val) == val;}, 
     odd: function(val) {return Math.abs(val) % 2 == 1;}, 
     even: function(val) {return val % 2 == 0;}, 
-    greater_than: function(val, compare_to) {return val > compare_to;},
-    greater_than_or_equal_to: function(val, compare_to) {return val >= compare_to;} ,
-    equal_to: function(val, compare_to) {return val == compare_to;} ,
-    less_than: function(val, compare_to) {return val < compare_to;} ,
-    less_than_or_equal_to: function(val, compare_to) {return val <= compare_to;} 
+    greaterThan: function(val, compare_to) {return val > compare_to;},
+    greaterThanOrEqualTo: function(val, compare_to) {return val >= compare_to;} ,
+    equalTo: function(val, compare_to) {return val == compare_to;} ,
+    lessThan: function(val, compare_to) {return val < compare_to;} ,
+    lessThanOrEqualTo: function(val, compare_to) {return val <= compare_to;} 
   },
   format: {
     pattern: function(val, compare_to) {return val.toString().match(compare_to);}
@@ -124,7 +124,7 @@ var interpolation_scope_extractors = {
 
 exports.validate = function validate(obj, config) {  
   
-  var errors = new_errors();
+  var errors = newErrors();
   var default_messages = config.default_messages || {};
   _.without(validation_types, 'required').forEach(function(validation_type) {
     if (!default_messages[validation_type]) default_messages[validation_type] = {};
@@ -188,7 +188,7 @@ exports.validate = function validate(obj, config) {
       }
     }
   });
-  if (!errors.is_empty()) return errors;
+  if (!errors.isEmpty()) return errors;
 }
 
 function interpolate_msg(msg, name, value, compare_to, vars) {

@@ -26,15 +26,15 @@ module.exports = nodeunit.testCase({
     callback();
   },
 
-  "only_integer": test_only_integer,
+  "onlyInteger": test_onlyInteger,
   "even": test_even,
   "odd": test_odd,
   "comparisons": test_comparisons
     
 });
 
-function test_only_integer(test) {
-  test_num_type.call(this, test, 'only_integer', "*{{name}} must be an integer.*", [
+function test_onlyInteger(test) {
+  test_num_type.call(this, test, 'onlyInteger', "*{{name}} must be an integer.*", [
     ["a", true], ["b", true], [1.1, true], [2.2, true], 
     [1, false], [2, false], [1.0, false], [2.0, false]
   ]);
@@ -61,14 +61,14 @@ function test_comparisons(test, comp_type, msg_tmpl, compare_to, val_should_erro
   var that = this;  
   [
     [
-      "greater_than", "*{{name}} must be greater than {{compare_to}}.*", 0, 
+      "greaterThan", "*{{name}} must be greater than {{compare_to}}.*", 0, 
       [
         [-1, true], ["-1", true], [-0.1, true], ["-0.1", true], [0, true], 
         ["0", true], [0.1, false], ["0.1", false], [1, false], ["1", false]
       ]
     ],
     [
-      "greater_than_or_equal_to", 
+      "greaterThanOrEqualTo", 
       "*{{name}} must be greater than or equal to {{compare_to}}.*", 0, 
       [
           [-1, true], ["-1", true], [-0.1, true], ["-0.1", true], [0, false], 
@@ -76,21 +76,21 @@ function test_comparisons(test, comp_type, msg_tmpl, compare_to, val_should_erro
       ]
     ],
     [
-      "equal_to", "*{{name}} must be equal to {{compare_to}}.*", 0, 
+      "equalTo", "*{{name}} must be equal to {{compare_to}}.*", 0, 
       [
           [-1, true], ["-1", true], [-0.1, true], ["-0.1", true], [0, false], 
           ["0", false], [0.1, true], ["0.1", true], [1, true], ["1", true]
       ]
     ],
     [
-      "less_than", "*{{name}} must be less than {{compare_to}}.*", 0, 
+      "lessThan", "*{{name}} must be less than {{compare_to}}.*", 0, 
       [
           [-1, false], ["-1", false], [-0.1, false], ["-0.1", false], [0, true], 
           ["0", true], [0.1, true], ["0.1", true], [1, true], ["1", true]
       ]
     ],
     [
-      "less_than_or_equal_to", "*{{name}} must be less than or equal to {{compare_to}}.*", 0, 
+      "lessThanOrEqualTo", "*{{name}} must be less than or equal to {{compare_to}}.*", 0, 
       [
           [-1, false], ["-1", false], [-0.1, false], ["-0.1", false], [0, false], 
           ["0", false], [0.1, true], ["0.1", true], [1, true], ["1", true]
