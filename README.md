@@ -9,9 +9,9 @@ format.
 ## Requirements
 
 * Node.js >0.2.4
-* [Underscore.js](http://documentcloud.github.com/underscore/) 1.0.2
-* [inflection-js](http://code.google.com/p/inflection-js/) r37
-* [node-async-testing](http://github.com/bentomas/node-async-testing) 0.4.0
+* [Underscore.js](http://documentcloud.github.com/underscore/)
+* [Underscore.string](https://github.com/edtsech/underscore.string)
+* [nodeunit](https://github.com/caolan/nodeunit)
   (optional, only needed to run tests)
 
 ## Usage

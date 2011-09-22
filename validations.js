@@ -1,6 +1,11 @@
 var _ = require('underscore')._;
 var sys = require('sys');
-require('inflection');
+
+_.mixin(require('underscore.string'));
+
+_.humanize = function(s) {
+  return _(s).underscored().replace('_', ' ');
+}
 
 var global_default_messages = {
   required: "{{name}} is required.",
@@ -168,7 +173,9 @@ exports.validate = function validate(obj, config) {
     for (var i = 0; i < validation_types.length; i++) {
       var validation_type = validation_types[i];
       if (!prop_config[validation_type]) continue;
-      if (validation_type != 'required' && is_blank(value)) continue;
+      if (validation_type != 'required' && 
+          (value === undefined || value === null )) 
+          continue;
       if (typeof valid_funcs[validation_type] == 'function') {
         var is_valid = test_and_add_error_message(prop_name, prop_config, 
                          validation_type, value);
@@ -185,7 +192,7 @@ exports.validate = function validate(obj, config) {
 }
 
 function interpolate_msg(msg, name, value, compare_to, vars) {
-  var interp_msg = msg.replace(/{{name}}/, name.humanize()).
+  var interp_msg = msg.replace(/{{name}}/, _.humanize(name)).
                        replace(/{{value}}/, value).
                        replace(/{{compare_to}}/, compare_to);
   if (vars)
