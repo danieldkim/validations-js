@@ -1,5 +1,5 @@
 var _ = require('underscore')._;
-var sys = require('sys');
+var util = require('util');
 
 _.mixin(require('underscore.string'));
 
@@ -82,7 +82,7 @@ var newErrors= exports.newErrors = function() {
       return _.size(_errors);
     },
     toString: function() {
-      return sys.inspect(_errors);
+      return util.inspect(_errors);
     }
   };
 }

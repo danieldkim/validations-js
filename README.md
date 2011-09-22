@@ -178,7 +178,7 @@ Here are the methods available:
   found, passing errors and name of property to *callback*.  e.g.:
   <pre>
   errors\_result.each(function(errors, name) {
-    sys.puts("Errors on " + name + ":" + errors.join(" "));
+    util.puts("Errors on " + name + ":" + errors.join(" "));
   })
   </pre>
   *errors* is an normally an array of error messages.  When using recursion,
@@ -234,7 +234,7 @@ display an error with the *lat* property like so:
     if (!isBlank(errors)
         && errors.isInvalid("location")
         && errors.on("location").isInvalid("lat"))
-      sys.puts("Problem with lat: " + errors.on("location").on("lat").join(" "));
+      util.puts("Problem with lat: " + errors.on("location").on("lat").join(" "));
 
 ## License
 

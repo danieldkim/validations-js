@@ -1,6 +1,6 @@
 require.paths.unshift('./lib');
 
-var sys = require('sys');
+var util = require('util');
 var validations = require('validations');
 var _ = require('underscore')._;
 var assert = require('assert');
