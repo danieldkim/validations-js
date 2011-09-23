@@ -1,11 +1,19 @@
-var _ = require('underscore')._;
-var util = require('util');
+(function() {
 
-_.mixin(require('underscore.string'));
-
-_.humanize = function(s) {
-  return _(s).underscored().replace('_', ' ');
+if (typeof require !== 'undefined') {
+  var _ = require('underscore')._;
+  _.mixin(require('underscore.string'));
+  String.prototype.humanize = function() {
+    return _(this).underscored().replace('_', ' ');
+  }
+  exports.newErrors = newErrors; 
+  exports.validate = validate;
+} else {
+  var _ = this._;
+  this.newErrors = newErrors;
+  this.validate = validate;
 }
+
 
 var globalDefaultMessages = {
   required: "{{name}} is required.",
@@ -29,7 +37,7 @@ var globalDefaultMessages = {
   }
 }
 
-var newErrors= exports.newErrors = function() {
+var newErrors = function() {
   var _errors = {};
   return {
     errors: function() {return _errors},
@@ -82,7 +90,7 @@ var newErrors= exports.newErrors = function() {
       return _.size(_errors);
     },
     toString: function() {
-      return util.inspect(_errors);
+      return JSON.stringify(_errors);
     }
   };
 }
@@ -122,7 +130,7 @@ var interpolation_scope_extractors = {
   }
 };
 
-exports.validate = function validate(obj, config) {  
+function validate(obj, config) {  
   
   var errors = newErrors();
   var defaultMessages = config.defaultMessages || {};
@@ -192,7 +200,7 @@ exports.validate = function validate(obj, config) {
 }
 
 function interpolate_msg(msg, name, value, compare_to, vars) {
-  var interp_msg = msg.replace(/{{name}}/, _.humanize(name)).
+  var interp_msg = msg.replace(/{{name}}/, name.humanize(true)).
                        replace(/{{value}}/, value).
                        replace(/{{compare_to}}/, compare_to);
   if (vars)
@@ -201,3 +209,6 @@ function interpolate_msg(msg, name, value, compare_to, vars) {
     });
   return interp_msg;
 }
+
+
+})();

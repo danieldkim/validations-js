@@ -8,24 +8,36 @@ format.
 
 ## Requirements
 
-* Node.js >0.2.4
 * [Underscore.js](http://documentcloud.github.com/underscore/)
-* [Underscore.string](https://github.com/edtsech/underscore.string)
-* [nodeunit](https://github.com/caolan/nodeunit)
-  (optional, only needed to run tests)
+
+* [inflections-js](http://code.google.com/p/inflection-js/) (only when running in browser)
+
+* [Underscore.string](https://github.com/edtsech/underscore.string) (only when running on Node.js)
+
+* JSON.stringify() support
+
+* Node.js and [nodeunit](https://github.com/caolan/nodeunit) (optional, only
+  needed to run tests)
 
 ## Usage
 
 You can install using npm:
 
     npm install validations
-    
-To use the validations library, require validations.js and call the validations
-function, passing it the object to be validated and a validation configuration,
-like so:
+
+Or download the validations.js file from github.
+
+To use the validations library in Node.js require validations.js and call the
+validations function, passing it the object to be validated and a validation
+configuration, like so:
 
     var validations = require('validations');
     var errors = validations.validate(my_object, my_validation_config);
+
+If using in the browser include underscore.js, inflection.js, validations.js
+and, if necessary,
+[json2.js](https://github.com/douglascrockford/JSON-js/blob/master/json2.js) in
+your page instead of using <code>require()</code>;
 
 The various configuration options and the api for the errors object that is
 returned are discussed below.
