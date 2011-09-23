@@ -11,7 +11,7 @@ module.exports = nodeunit.testCase({
   setUp: function(callback) {
     this.o = {};
     this.validation_config = {
-      default_messages: {
+      defaultMessages: {
         format: {
           pattern: '*{{name}} should match pattern {{compare_to}}.*'
         }
@@ -35,7 +35,7 @@ module.exports = nodeunit.testCase({
 
 function test_format(test) {
   var errors, config = this.validation_config, 
-      msg_tmpl = config.default_messages.format.pattern;
+      msg_tmpl = config.defaultMessages.format.pattern;
 
   test_util.test_val_should_error_tuples([
       [undefined, false], [null, false], [0, true], [1, true], ["a", true], 

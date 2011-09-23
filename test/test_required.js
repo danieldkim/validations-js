@@ -11,7 +11,7 @@ module.exports = nodeunit.testCase({
   setUp: function(callback) {
     this.o = {};
     this.validation_config = {
-      default_messages: {
+      defaultMessages: {
         required: '*{{name}} is required.*'
       },
       properties: {
@@ -31,7 +31,7 @@ module.exports = nodeunit.testCase({
 
 function test_required(test) {
   var errors, config = this.validation_config, 
-      msg_tmpl = config.default_messages.required;
+      msg_tmpl = config.defaultMessages.required;
 
   test_util.test_val_should_error_tuples([
       [undefined, true], [null, true], ["", true], [0, false],

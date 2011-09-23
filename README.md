@@ -146,11 +146,11 @@ property configuration like so:
     });
 
 If you would like to override the message for a particular option for all
-properties in a configuration, you can pass a *default\_messages* configuration
+properties in a configuration, you can pass a *defaultMessages* configuration
 like so:
 
     var errors = validations.validate(my_object, {
-      default_messages: {
+      defaultMessages: {
         length: {
           is: "{{name}} must be {{compare_to}} characters in length, no more, no less."
         }

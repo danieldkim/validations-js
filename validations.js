@@ -7,7 +7,7 @@ _.humanize = function(s) {
   return _(s).underscored().replace('_', ' ');
 }
 
-var global_default_messages = {
+var globalDefaultMessages = {
   required: "{{name}} is required.",
   length: {
     is: "{{name}} must be exactly {{compare_to}} characters.",
@@ -125,9 +125,9 @@ var interpolation_scope_extractors = {
 exports.validate = function validate(obj, config) {  
   
   var errors = newErrors();
-  var default_messages = config.default_messages || {};
+  var defaultMessages = config.defaultMessages || {};
   _.without(validation_types, 'required').forEach(function(validation_type) {
-    if (!default_messages[validation_type]) default_messages[validation_type] = {};
+    if (!defaultMessages[validation_type]) defaultMessages[validation_type] = {};
   });
 
   function test_and_add_error_message(prop_name, prop_config, validation_type, value, subtype) {
@@ -147,11 +147,11 @@ exports.validate = function validate(obj, config) {
     if (!valid_func(value, compare_to)) {
       var msg = prop_config.message;
       if (subtype) {
-        msg = msg  || default_messages[validation_type][subtype] || 
-                global_default_messages[validation_type][subtype];
+        msg = msg  || defaultMessages[validation_type][subtype] || 
+                globalDefaultMessages[validation_type][subtype];
       } else {
-        msg = msg  || default_messages[validation_type] || 
-                global_default_messages[validation_type];
+        msg = msg  || defaultMessages[validation_type] || 
+                globalDefaultMessages[validation_type];
       }
       var vars;
       if (interpolation_scope_extractor)

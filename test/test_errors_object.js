@@ -11,7 +11,7 @@ module.exports = nodeunit.testCase({
   setUp: function(callback) {
     this.o = {};
     this.validation_config = {
-      default_messages: {},
+      defaultMessages: {},
       properties: {
         p: {}
       }

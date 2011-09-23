@@ -11,7 +11,7 @@ module.exports = nodeunit.testCase({
   setUp: function(callback) {
     this.o = {};
     this.validation_config = {
-      default_messages: {
+      defaultMessages: {
         length: {}
       },
       properties: {
@@ -32,7 +32,7 @@ module.exports = nodeunit.testCase({
 
 function test_is(test) {
   var errors, config = this.validation_config, 
-      msg_tmpl = config.default_messages.required;
+      msg_tmpl = config.defaultMessages.required;
 
   test_length.call(this, test, "is", "*{{name}} must be of length {{compare_to}}.*", [
     [undefined, false], [null, false], [0, false], [1, false], 
@@ -44,7 +44,7 @@ function test_is(test) {
 
 function test_min(test) {
   var errors, config = this.validation_config, 
-      msg_tmpl = config.default_messages.required;
+      msg_tmpl = config.defaultMessages.required;
 
   test_length.call(this, test, "min", "*{{name}} must be at least {{compare_to}} characters.*", [
     [undefined, false], [null, false], [0, false], [1, false], 
@@ -56,7 +56,7 @@ function test_min(test) {
 
 function test_max(test) {
   var errors, config = this.validation_config, 
-      msg_tmpl = config.default_messages.required;
+      msg_tmpl = config.defaultMessages.required;
 
   test_length.call(this, test, "max", "*{{name}} must be at most {{compare_to}} characters.*", [
     [undefined, false], [null, false], [0, false], [1, false], 
@@ -69,7 +69,7 @@ function test_max(test) {
 function test_length(test, length_type, msg_tmpl, 
     val_should_error_tuples, compare_to) {
   var config = this.validation_config;
-  config.default_messages.length[length_type] = msg_tmpl;
+  config.defaultMessages.length[length_type] = msg_tmpl;
   config.properties.p.length[length_type] = 
     compare_to == undefined ? true : compare_to;
 

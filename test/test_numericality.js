@@ -11,7 +11,7 @@ module.exports = nodeunit.testCase({
   setUp: function(callback) {
     this.o = {};
     this.validation_config = {
-      default_messages: {
+      defaultMessages: {
         numericality: {}
       },
       properties: {
@@ -100,7 +100,7 @@ function test_comparisons(test, comp_type, msg_tmpl, compare_to, val_should_erro
     var comp_type = test_config[0], msg_tmpl = test_config[1],
         compare_to = test_config[2], val_should_error_tuples = test_config[3];
     that.validation_config = {
-      default_messages: {
+      defaultMessages: {
         numericality: {}
       },
       properties: {
@@ -118,7 +118,7 @@ function test_comparisons(test, comp_type, msg_tmpl, compare_to, val_should_erro
 function test_num_type(test, num_type, msg_tmpl, 
     val_should_error_tuples, compare_to) {
   var config = this.validation_config;
-  config.default_messages.numericality[num_type] = msg_tmpl;
+  config.defaultMessages.numericality[num_type] = msg_tmpl;
   config.properties.p.numericality[num_type] = 
     compare_to == undefined ? true : compare_to;
 
