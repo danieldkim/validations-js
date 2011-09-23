@@ -1,0 +1,16 @@
+{
+  "name"          : "validations",
+  "description"   : "A validation library for JavaScript objects modeled loosely on ActiveRecord validations.",
+  "homepage"      : "http://danieldkim.github.com/validations-js/",
+  "keywords"      : ["validation"],
+  "author"        : "Daniel Kim <danieldkimster@gmail.com>",
+  "contributors"  : [],
+  "dependencies"  : {
+    "underscore"        : ">=1.1.7",
+    "underscore.string" : ">=1.1.6",
+    "nodeunit"          : ">=0.5.5"
+  },
+  "repository"    : {"type": "git", "url": "git@github.com:danieldkim/validations-js.git"},
+  "main"          : "validations.js",
+  "version"       : "0.1.0"
+}
