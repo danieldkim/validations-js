@@ -1,6 +1,6 @@
 (function() {
 
-if (typeof require !== 'undefined') {
+if (typeof module !== 'undefined' && module.exports) {
   var _ = require('underscore')._;
   _.mixin(require('underscore.string'));
   String.prototype.humanize = function() {
