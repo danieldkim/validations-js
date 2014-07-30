@@ -4,13 +4,18 @@
   "homepage"      : "http://danieldkim.github.com/validations-js/",
   "keywords"      : ["validation"],
   "author"        : "Daniel Kim <danieldkimster@gmail.com>",
-  "contributors"  : [],
+  "contributors"  : ["Pavlo Voznenko <p.voznenko@gmail.com> (https://twitter.com/pvoznenko/)"],
   "dependencies"  : {
     "underscore"        : ">=1.1.7",
     "underscore.string" : ">=1.1.6",
-    "nodeunit"          : ">=0.5.5"
+    "nodeunit"          : ">=0.5.5",
+    "async_testing"     : "0.3.2"
   },
   "repository"    : {"type": "git", "url": "git@github.com:danieldkim/validations-js.git"},
   "main"          : "validations.js",
-  "version"       : "0.1.2"
+  "version"       : "0.1.3",
+  "scripts": {
+    "build": "npm install",
+    "test": "./node_modules/nodeunit/bin/nodeunit test"
+  }
 }

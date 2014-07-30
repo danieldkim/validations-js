@@ -1,10 +1,8 @@
-require.paths.unshift('./lib');
-
 var util = require('util');
-var validations = require('validations');
-var _ = require('underscore')._;
+var validations = require('../validations');
+var _ = require('underscore');
 var assert = require('assert');
-var test_util = require('test-util');
+var test_util = require('../lib/test-util');
 var nodeunit = require('nodeunit');
     
 module.exports = nodeunit.testCase({
@@ -34,7 +32,7 @@ module.exports = nodeunit.testCase({
 });
 
 function test_format(test) {
-  var errors, config = this.validation_config, 
+  var config = this.validation_config,
       msg_tmpl = config.defaultMessages.format.pattern;
 
   test_util.test_val_should_error_tuples([
