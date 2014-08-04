@@ -260,7 +260,7 @@ var errors = validations.validate(place, {
       }
     }
   }
-})
+});
 ```
 
 The errors object returned by *validate* is also recursive. You would detect and
@@ -273,30 +273,40 @@ if (!isBlank(errors)
   util.puts("Problem with lat: " + errors.on("location").on("lat").join(" "));
 ```
 
-**Notice** that all nodes in sequence are required, if it not there you will get error.
+**Notice** that all nodes in the path are required, if it not there you will get error.
 
 For example if object for validation looks like:
 
 ```javascript
-{
-    node1: {
-        wrongNode: {
-            node3: true
-        }
+var obj = {
+    firstNode: {
+      wrongNode: {
+        thirdNode: true
+      }
     }
-}
+  };
 ```
 
 And validation pattern like:
 
 ```javascript
-{properties: {
-    node1: {object: {properties: {
-        node2: {object: {properties: {
-            node3: true
-        }}}
-    }}}
-}}
+var errors = validations.validate(obj, {
+  properties: {
+    firstNode: {
+      object: {
+        properties: {
+          secondNode: {
+            object: {
+              properties: {
+                thirdNode: true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+});
 ```
 
 You will get error message that one of the nodes in sequence are missing.
