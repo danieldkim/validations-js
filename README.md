@@ -1,6 +1,6 @@
 # validations-js
 
-[![Build Status](https://travis-ci.org/fosco-maestro/validations-js.png)](https://travis-ci.org/fosco-maestro/validations-js)
+[![Build Status](https://travis-ci.org/danieldkim/validations-js.png)](https://travis-ci.org/danieldkim/validations-js)
 
 validations-js is a validation library for JavaScript objects modeled loosely on
 [ActiveRecord validations](http://ar.rubyonrails.org/classes/ActiveRecord/Validations/ClassMethods.html).
@@ -273,9 +273,9 @@ if (!isBlank(errors)
   util.puts("Problem with lat: " + errors.on("location").on("lat").join(" "));
 ```
 
-**Notice** that all nodes in the path are required, if it not there you will get error.
+**Note:** all nodes in a path must exist.
 
-For example if object for validation looks like:
+For example if the object you're validating looks like:
 
 ```javascript
 var obj = {
@@ -287,7 +287,7 @@ var obj = {
   };
 ```
 
-And validation pattern like:
+And your validation pattern looks like:
 
 ```javascript
 var errors = validations.validate(obj, {
@@ -309,7 +309,7 @@ var errors = validations.validate(obj, {
 });
 ```
 
-You will get error message that one of the nodes in sequence are missing.
+You will get an error message that one of the nodes in the path is missing.
 
 ## License
 
