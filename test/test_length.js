@@ -1,10 +1,8 @@
-require.paths.unshift('./lib');
-
 var util = require('util');
-var validations = require('validations');
-var _ = require('underscore')._;
+var validations = require('../validations');
+var _ = require('underscore');
 var assert = require('assert');
-var test_util = require('test-util');
+var test_util = require('../lib/test-util');
 var nodeunit = require('nodeunit');
     
 module.exports = nodeunit.testCase({
@@ -31,9 +29,6 @@ module.exports = nodeunit.testCase({
 });
 
 function test_is(test) {
-  var errors, config = this.validation_config, 
-      msg_tmpl = config.defaultMessages.required;
-
   test_length.call(this, test, "is", "*{{name}} must be of length {{compare_to}}.*", [
     [undefined, false], [null, false], [0, false], [1, false], 
     [11, true], ["", true], ["a", false], ["aa", true]
@@ -43,9 +38,6 @@ function test_is(test) {
 }
 
 function test_min(test) {
-  var errors, config = this.validation_config, 
-      msg_tmpl = config.defaultMessages.required;
-
   test_length.call(this, test, "min", "*{{name}} must be at least {{compare_to}} characters.*", [
     [undefined, false], [null, false], [0, false], [1, false], 
     [11, false], ["", true], ["a", false], ["aa", false]
@@ -55,9 +47,6 @@ function test_min(test) {
 }
 
 function test_max(test) {
-  var errors, config = this.validation_config, 
-      msg_tmpl = config.defaultMessages.required;
-
   test_length.call(this, test, "max", "*{{name}} must be at most {{compare_to}} characters.*", [
     [undefined, false], [null, false], [0, false], [1, false], 
     [11, true], ["", false], ["a", false], ["aa", true]

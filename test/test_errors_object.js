@@ -1,10 +1,7 @@
-require.paths.unshift('./lib');
-
 var util = require('util');
-var validations = require('validations');
-var _ = require('underscore')._;
+var validations = require('../validations');
+var _ = require('underscore');
 var assert = require('assert');
-var test_util = require('test-util');
 var nodeunit = require('nodeunit');
     
 module.exports = nodeunit.testCase({
@@ -20,6 +17,6 @@ module.exports = nodeunit.testCase({
   },
   tearDown: function(callback) {
     callback();
-  },
+  }
 });
 

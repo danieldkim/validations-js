@@ -1,15 +1,16 @@
 (function() {
+var _;
 
 if (typeof module !== 'undefined' && module.exports) {
-  var _ = require('underscore')._;
+  _ = require('underscore');
   _.mixin(require('underscore.string'));
   String.prototype.humanize = function() {
     return _(this).underscored().replace('_', ' ');
-  }
+  };
   exports.newErrors = newErrors; 
   exports.validate = validate;
 } else {
-  var _ = this._;
+  _ = this._;
   this.newErrors = newErrors;
   this.validate = validate;
 }
@@ -35,7 +36,7 @@ var globalDefaultMessages = {
   format: {
     pattern: "{{name}} is not formatted correctly."
   }
-}
+};
 
 var newErrors = function() {
   var _errors = {};
@@ -93,7 +94,7 @@ var newErrors = function() {
       return JSON.stringify(_errors);
     }
   };
-}
+};
 
 function isBlank(v) { return v === undefined || v === null || v === ''; }
 
@@ -117,7 +118,7 @@ var valid_funcs = {
   format: {
     pattern: function(val, compare_to) {return val.toString().match(compare_to);}
   }
-}
+};
 // we want to execute the validations in this order
 var validation_types = ['required', 'length', 'numericality', 'format'];
 
@@ -126,7 +127,7 @@ var interpolation_scope_extractors = {
     count: function(val) {return {count: val.length};},
     is: function(val) {return {count: val.length};},
     min: function(val) {return {count: val.length};},
-    max: function(val) {return {count: val.length};},
+    max: function(val) {return {count: val.length};}
   }
 };
 
@@ -174,7 +175,14 @@ function validate(obj, config) {
   _.forEach(config.properties, function(prop_config, prop_name) {
     var value = obj[prop_name];
     if (prop_config.object) {
-      // recurse
+      // root property must exist otherwise we will get error
+      var isValid = test_and_add_error_message(prop_name, {required: true}, 'required', value);
+
+      if (!isValid) {
+        return;
+      }
+
+      // recursive
       errors.add(prop_name, validate(value, prop_config.object));
       return; // no other validation types should apply if validation type is 'object'
     }
